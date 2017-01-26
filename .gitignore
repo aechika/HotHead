@@ -1,0 +1,12 @@
+HotHead.xcworkspace/xcshareddata/
+HotHead.xcworkspace/xcuserdata/
+HotHead.xcodeproj/xcuserdata/
+Pods/
+build/
+*.DS_Store
+
+# AppCode stuff
+/*.iml
+
+# clang stuff
+compile_commands.json

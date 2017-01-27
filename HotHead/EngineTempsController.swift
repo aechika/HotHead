@@ -11,7 +11,7 @@ import AVFoundation
 import Charts
 
 
-class ViewController: UIViewController, ChartViewDelegate {
+class EngineTempsController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var chartCHT: LineChartView!
     @IBOutlet weak var chartEGT: LineChartView!
@@ -34,10 +34,15 @@ class ViewController: UIViewController, ChartViewDelegate {
     
     var dataClient:DataClient?
     var engineTemps:[EngineTemps?] = []
-    let maxNumberOfPoints = 30
+    let maxNumberOfPoints = 60
     var timer:NSTimer?
     var player: AVAudioPlayer?
     
+    enum TempType:Int {
+        case CHT = 0
+        case EGT
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -46,10 +51,10 @@ class ViewController: UIViewController, ChartViewDelegate {
         initializeChart(chartEGT, upperThreshold: egtUpperThreshold, lowerThreshold: egtLowerThreshold, upperMin: egtUpperMin, lowerMin: egtLowerMin)
         updateChartView()
 
-        initializeView()
+        startAnalyzing()
     }
     
-    func initializeView() {
+    func startAnalyzing() {
         
         timer = nil
         engineTemps.removeAll()
@@ -86,13 +91,13 @@ class ViewController: UIViewController, ChartViewDelegate {
                 }
                 else {
                     print("SUCCESSFULLY RECEIVED \n\n \(data!.toJSONString(true)!)")
-                    self.newInfoReceived(data!)
+                    self.processNewTemps(data!)
                 }
             }
         }
     }
     
-    func newInfoReceived(data:EngineTemps) {
+    func processNewTemps(data:EngineTemps) {
         
         self.engineTemps.append(data)
         
@@ -144,15 +149,15 @@ class ViewController: UIViewController, ChartViewDelegate {
     
     func updateChartView() {
         
-        chartCHT.data = getCHTChartDataWithTimeScale()
+        chartCHT.data = getChartDataWithTimeScale(chartCHT, tempType: TempType.CHT, upperMin: chtUpperMin, lowerMin: chtLowerMin)
         chartCHT.setNeedsDisplay()
         
-        chartEGT.data = getEGTChartDataWithTimeScale()
+        chartEGT.data = getChartDataWithTimeScale(chartEGT, tempType: TempType.EGT, upperMin: egtUpperMin, lowerMin: egtLowerMin)
         chartEGT.setNeedsDisplay()
 
     }
     
-    func getCHTChartDataWithTimeScale() -> LineChartData {
+    func getChartDataWithTimeScale(chart:LineChartView, tempType:TempType, upperMin:Int, lowerMin:Int) -> LineChartData {
         var dataSets:[LineChartDataSet] = []
         
         var allYVals:[ChartDataEntry] = []
@@ -188,22 +193,44 @@ class ViewController: UIViewController, ChartViewDelegate {
                 if let t = temp {
 
                     var val = 0
-                    switch cylinderIndex {
-                    case 1:
-                        val = t.cht1
-                    case 2:
-                        val = t.cht2
-                    case 3:
-                        val = t.cht3
-                    case 4:
-                        val = t.cht4
-                    case 5:
-                        val = t.cht5
-                    case 6:
-                        val = t.cht6
-                    default:
-                        0
+                    
+                    if tempType == .CHT {
+                        switch cylinderIndex {
+                        case 1:
+                            val = t.cht1
+                        case 2:
+                            val = t.cht2
+                        case 3:
+                            val = t.cht3
+                        case 4:
+                            val = t.cht4
+                        case 5:
+                            val = t.cht5
+                        case 6:
+                            val = t.cht6
+                        default:
+                            0
+                        }
                     }
+                    else if tempType == .EGT {
+                        switch cylinderIndex {
+                        case 1:
+                            val = t.egt1
+                        case 2:
+                            val = t.egt2
+                        case 3:
+                            val = t.egt3
+                        case 4:
+                            val = t.egt4
+                        case 5:
+                            val = t.egt5
+                        case 6:
+                            val = t.egt6
+                        default:
+                            0
+                        }
+                    }
+
                     
                     let entry = ChartDataEntry(value: Double(val), xIndex: xindex, data:t)
                     yVals.append(entry)
@@ -213,92 +240,17 @@ class ViewController: UIViewController, ChartViewDelegate {
                 xindex += 1
             }
             
-            chartCHT.leftAxis.drawLabelsEnabled = (yVals.count > 0)
+            chart.leftAxis.drawLabelsEnabled = (yVals.count > 0)
             if yVals.count > 0 {
                 let set1:LineChartDataSet = LineChartDataSet(yVals: yVals, label: "Cylinder \(cylinderIndex)")
-                chartCHT.applyDataSetStyling(set1, circleColor:lineColor, lineColor:lineColor, showFill:false)
+                chart.applyDataSetStyling(set1, circleColor:lineColor, lineColor:lineColor, showFill:false)
                 dataSets.append(set1)
                 
             }
             
         }
         
-        chartCHT.calculateChartYAxis(allYVals, topBottomBufferPercent:20, lowerLimit: Double(chtLowerMin), upperLimit: Double(chtUpperMin))
-        
-        return LineChartData(xVals: xVals, dataSets: dataSets)
-    }
-    
-    func getEGTChartDataWithTimeScale() -> LineChartData {
-        var dataSets:[LineChartDataSet] = []
-        
-        var allYVals:[ChartDataEntry] = []
-        var xVals:[NSObject] = []
-        for _ in 0...(maxNumberOfPoints-1) {
-            xVals.append("")
-        }
-        
-        for cylinderIndex in 1...6 {
-            
-            var lineColor = UIColor.blackColor()
-            switch cylinderIndex {
-            case 1:
-                lineColor = UIColor.whiteColor()
-            case 2:
-                lineColor = UIColor.greenColor()
-            case 3:
-                lineColor = UIColor.blueColor()
-            case 4:
-                lineColor = UIColor.yellowColor()
-            case 5:
-                lineColor = UIColor.orangeColor()
-            case 6:
-                lineColor = UIColor.purpleColor()
-            default:
-                lineColor = UIColor.blackColor()
-            }
-            
-            var yVals:[ChartDataEntry] = []
-            var xindex:Int = 0
-            for temp in engineTemps {
-                
-                if let t = temp {
-                    var val = 0
-                    switch cylinderIndex {
-                    case 1:
-                        val = t.egt1
-                    case 2:
-                        val = t.egt2
-                    case 3:
-                        val = t.egt3
-                    case 4:
-                        val = t.egt4
-                    case 5:
-                        val = t.egt5
-                    case 6:
-                        val = t.egt6
-                    default:
-                        0
-                    }
-                    
-                    let entry = ChartDataEntry(value: Double(val), xIndex: xindex, data:t)
-                    yVals.append(entry)
-                    allYVals.append(entry)
-                }
-                
-                xindex += 1
-            }
-            
-            chartEGT.leftAxis.drawLabelsEnabled = (yVals.count > 0)
-            if yVals.count > 0 {
-                let set1:LineChartDataSet = LineChartDataSet(yVals: yVals, label: "Cylinder \(cylinderIndex)")
-                chartEGT.applyDataSetStyling(set1, circleColor:lineColor, lineColor:lineColor, showFill:false)
-                dataSets.append(set1)
-                
-            }
-            
-        }
-        
-        chartEGT.calculateChartYAxis(allYVals, topBottomBufferPercent:20, lowerLimit: Double(egtLowerMin), upperLimit: Double(egtUpperMin))
+        chart.calculateChartYAxis(allYVals, topBottomBufferPercent:20, lowerLimit: Double(lowerMin), upperLimit: Double(upperMin))
         
         return LineChartData(xVals: xVals, dataSets: dataSets)
     }
@@ -321,14 +273,14 @@ class ViewController: UIViewController, ChartViewDelegate {
             let textField = alert!.textFields![0] as UITextField
             
                 defaults.setObject(textField.text, forKey: UserDefaultKey_Base_Url)
-                self.initializeView()
+                self.startAnalyzing()
             }))
         
         alert.addAction(UIAlertAction(title: "Mock", style: .Default, handler: { [weak alert] (action) -> Void in
             _ = alert!.textFields![0] as UITextField
             
             defaults.setObject("mock", forKey: UserDefaultKey_Base_Url)
-            self.initializeView()
+            self.startAnalyzing()
             }))
 
         

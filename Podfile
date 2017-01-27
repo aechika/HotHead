@@ -14,5 +14,6 @@ target 'HotHead' do
 
 pod 'Alamofire', '~> 3.0'
 pod 'ObjectMapper', '1.1.5'
+pod 'Charts', '2.2.5'
 
 end

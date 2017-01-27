@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16B6998AD85E632911B6CDE3 /* Pods_HotHead.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099DA4A23ABF8117F8FE33CE /* Pods_HotHead.framework */; };
+		982FE7911E3AC22C00141EFD /* EngineTemps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982FE7901E3AC22C00141EFD /* EngineTemps.swift */; };
 		983893D01E3AA530007C61A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983893CF1E3AA530007C61A6 /* AppDelegate.swift */; };
 		983893D21E3AA530007C61A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983893D11E3AA530007C61A6 /* ViewController.swift */; };
 		983893D51E3AA530007C61A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983893D31E3AA530007C61A6 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 		983893DA1E3AA530007C61A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983893D81E3AA530007C61A6 /* LaunchScreen.storyboard */; };
 		983893E51E3AA530007C61A6 /* HotHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983893E41E3AA530007C61A6 /* HotHeadTests.swift */; };
 		983893F01E3AA530007C61A6 /* HotHeadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983893EF1E3AA530007C61A6 /* HotHeadUITests.swift */; };
+		989BB3F21E3ABBE300EE7201 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989BB3F11E3ABBE300EE7201 /* Constants.swift */; };
+		98F746881E3AC6C700DEC20E /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F746871E3AC6C700DEC20E /* StringHelper.swift */; };
+		98F7468A1E3AC98E00DEC20E /* DataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F746891E3AC98E00DEC20E /* DataClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		099DA4A23ABF8117F8FE33CE /* Pods_HotHead.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HotHead.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		982FE7901E3AC22C00141EFD /* EngineTemps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineTemps.swift; sourceTree = "<group>"; };
 		983893CC1E3AA530007C61A6 /* HotHead.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotHead.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		983893CF1E3AA530007C61A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		983893D11E3AA530007C61A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +54,9 @@
 		983893EB1E3AA530007C61A6 /* HotHeadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HotHeadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		983893EF1E3AA530007C61A6 /* HotHeadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotHeadUITests.swift; sourceTree = "<group>"; };
 		983893F11E3AA530007C61A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		989BB3F11E3ABBE300EE7201 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		98F746871E3AC6C700DEC20E /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		98F746891E3AC98E00DEC20E /* DataClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClient.swift; sourceTree = "<group>"; };
 		A87E9C7029E411CE81A93469 /* Pods-HotHead.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotHead.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HotHead/Pods-HotHead.debug.xcconfig"; sourceTree = "<group>"; };
 		F234D2107B8713209662B6D8 /* Pods-HotHead.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotHead.release.xcconfig"; path = "Pods/Target Support Files/Pods-HotHead/Pods-HotHead.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +129,9 @@
 		983893CE1E3AA530007C61A6 /* HotHead */ = {
 			isa = PBXGroup;
 			children = (
+				98F7468C1E3AD4A300DEC20E /* DataClient */,
+				98F7468B1E3AD49900DEC20E /* Models */,
+				98F7468D1E3AD4BC00DEC20E /* Utils */,
 				983893CF1E3AA530007C61A6 /* AppDelegate.swift */,
 				983893D11E3AA530007C61A6 /* ViewController.swift */,
 				983893D31E3AA530007C61A6 /* Main.storyboard */,
@@ -147,6 +158,31 @@
 				983893F11E3AA530007C61A6 /* Info.plist */,
 			);
 			path = HotHeadUITests;
+			sourceTree = "<group>";
+		};
+		98F7468B1E3AD49900DEC20E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				989BB3F11E3ABBE300EE7201 /* Constants.swift */,
+				982FE7901E3AC22C00141EFD /* EngineTemps.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		98F7468C1E3AD4A300DEC20E /* DataClient */ = {
+			isa = PBXGroup;
+			children = (
+				98F746891E3AC98E00DEC20E /* DataClient.swift */,
+			);
+			name = DataClient;
+			sourceTree = "<group>";
+		};
+		98F7468D1E3AD4BC00DEC20E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				98F746871E3AC6C700DEC20E /* StringHelper.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +368,10 @@
 			files = (
 				983893D21E3AA530007C61A6 /* ViewController.swift in Sources */,
 				983893D01E3AA530007C61A6 /* AppDelegate.swift in Sources */,
+				98F7468A1E3AC98E00DEC20E /* DataClient.swift in Sources */,
+				989BB3F21E3ABBE300EE7201 /* Constants.swift in Sources */,
+				98F746881E3AC6C700DEC20E /* StringHelper.swift in Sources */,
+				982FE7911E3AC22C00141EFD /* EngineTemps.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +600,7 @@
 				983893F61E3AA530007C61A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		983893F71E3AA530007C61A6 /* Build configuration list for PBXNativeTarget "HotHeadTests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +609,7 @@
 				983893F91E3AA530007C61A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		983893FA1E3AA530007C61A6 /* Build configuration list for PBXNativeTarget "HotHeadUITests" */ = {
 			isa = XCConfigurationList;
@@ -576,6 +618,7 @@
 				983893FC1E3AA530007C61A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

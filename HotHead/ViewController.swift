@@ -34,12 +34,12 @@ class ViewController: UIViewController, ChartViewDelegate {
     
     
     var chtUpperThreshold:Int = 90
-    var chtLowerThreshold:Int = 50
+    var chtLowerThreshold:Int = 40
     var chtUpperMin:Int = 120
     var chtLowerMin:Int = 20
 
     var egtUpperThreshold:Int = 320
-    var egtLowerThreshold:Int = 120
+    var egtLowerThreshold:Int = 100
     var egtUpperMin:Int = 400
     var egtLowerMin:Int = 50
     

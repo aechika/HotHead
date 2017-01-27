@@ -35,13 +35,13 @@ class ViewController: UIViewController, ChartViewDelegate {
     
     var chtUpperThreshold:Int = 90
     var chtLowerThreshold:Int = 50
-    var chtUpperMin:Int = 100
+    var chtUpperMin:Int = 120
     var chtLowerMin:Int = 20
 
     var egtUpperThreshold:Int = 320
     var egtLowerThreshold:Int = 120
     var egtUpperMin:Int = 400
-    var egtLowerMin:Int = 100
+    var egtLowerMin:Int = 50
     
     
     var dataClient:DataClient?
@@ -56,6 +56,7 @@ class ViewController: UIViewController, ChartViewDelegate {
         
         initializeChart(chartCHT, upperThreshold: chtUpperThreshold, lowerThreshold: chtLowerThreshold, upperMin: chtUpperMin, lowerMin: chtLowerMin)
         initializeChart(chartEGT, upperThreshold: egtUpperThreshold, lowerThreshold: egtLowerThreshold, upperMin: egtUpperMin, lowerMin: egtLowerMin)
+        updateChartView()
 
         initializeView()
     }
@@ -75,7 +76,7 @@ class ViewController: UIViewController, ChartViewDelegate {
           
             btnUrl.setTitle(baseUrl, forState: UIControlState.Normal)
             
-            dataClient = DataClient(baseUrl: baseUrl, allowInvalidCert: true)
+            dataClient = DataClient(baseUrl: baseUrl, allowInvalidCert: true, isMock: isMock)
             
             //setup timer to run every 1 minute
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(requestUpdatedInfo), userInfo: nil, repeats: true)
@@ -85,7 +86,10 @@ class ViewController: UIViewController, ChartViewDelegate {
     
     func requestUpdatedInfo() {
         
-        lblTime.text = String(NSDate())
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.LongStyle
+        formatter.timeStyle = .MediumStyle
+        lblTime.text = formatter.stringFromDate(NSDate())
         
         if let client = dataClient {
             client.requestEngineTemps { (data, error) in
@@ -94,25 +98,30 @@ class ViewController: UIViewController, ChartViewDelegate {
                 }
                 else {
                     print("SUCCESSFULLY RECEIVED \n\n \(data!.toJSONString(true)!)")
-                    self.engineTemps.append(data!)
-                    
-                    //truncate number of data points
-                    var min = 0
-                    if self.engineTemps.count > self.maxNumberOfPoints {
-                        min = self.engineTemps.count - self.maxNumberOfPoints
-                    }
-                    self.engineTemps = Array(self.engineTemps[min..<self.engineTemps.count])
-                    
-                    //sort by timestamp
-                    self.engineTemps.sortInPlace {
-                        return $0?.timestamp < $1?.timestamp
-                    }
-                    
-                    self.updateAlerts(data!)
-                    self.updateChartView()
+                    self.newInfoReceived(data!)
                 }
             }
         }
+    }
+    
+    func newInfoReceived(data:EngineTemps) {
+        
+        self.engineTemps.append(data)
+        
+        //truncate number of data points
+        var min = 0
+        if self.engineTemps.count > self.maxNumberOfPoints {
+            min = self.engineTemps.count - self.maxNumberOfPoints
+        }
+        self.engineTemps = Array(self.engineTemps[min..<self.engineTemps.count])
+        
+        //sort by timestamp
+        self.engineTemps.sortInPlace {
+            return $0?.timestamp < $1?.timestamp
+        }
+        
+        self.updateAlerts(data)
+        self.updateChartView()
     }
     
     func updateAlerts(data:EngineTemps) {
@@ -160,7 +169,7 @@ class ViewController: UIViewController, ChartViewDelegate {
         
         var allYVals:[ChartDataEntry] = []
         var xVals:[NSObject] = []
-        for _ in 0...(engineTemps.count-1) {
+        for _ in 0...(maxNumberOfPoints-1) {
             xVals.append("")
         }
         
@@ -169,7 +178,7 @@ class ViewController: UIViewController, ChartViewDelegate {
             var lineColor = UIColor.blackColor()
             switch cylinderIndex {
             case 1:
-                lineColor = UIColor.redColor()
+                lineColor = UIColor.whiteColor()
             case 2:
                 lineColor = UIColor.greenColor()
             case 3:
@@ -226,7 +235,7 @@ class ViewController: UIViewController, ChartViewDelegate {
             
         }
         
-        chartCHT.calculateChartYAxis(allYVals, topBottomBufferPercent:20, lowerLimit: 40, upperLimit: 150)
+        chartCHT.calculateChartYAxis(allYVals, topBottomBufferPercent:20, lowerLimit: Double(chtLowerMin), upperLimit: Double(chtUpperMin))
         
         return LineChartData(xVals: xVals, dataSets: dataSets)
     }
@@ -236,7 +245,7 @@ class ViewController: UIViewController, ChartViewDelegate {
         
         var allYVals:[ChartDataEntry] = []
         var xVals:[NSObject] = []
-        for _ in 0...(engineTemps.count-1) {
+        for _ in 0...(maxNumberOfPoints-1) {
             xVals.append("")
         }
         
@@ -245,7 +254,7 @@ class ViewController: UIViewController, ChartViewDelegate {
             var lineColor = UIColor.blackColor()
             switch cylinderIndex {
             case 1:
-                lineColor = UIColor.redColor()
+                lineColor = UIColor.whiteColor()
             case 2:
                 lineColor = UIColor.greenColor()
             case 3:
@@ -301,7 +310,7 @@ class ViewController: UIViewController, ChartViewDelegate {
             
         }
         
-        chartEGT.calculateChartYAxis(allYVals, topBottomBufferPercent:20, lowerLimit: 120, upperLimit: 500)
+        chartEGT.calculateChartYAxis(allYVals, topBottomBufferPercent:20, lowerLimit: Double(egtLowerMin), upperLimit: Double(egtUpperMin))
         
         return LineChartData(xVals: xVals, dataSets: dataSets)
     }
@@ -335,6 +344,9 @@ class ViewController: UIViewController, ChartViewDelegate {
     func initializeChart(chart:LineChartView, upperThreshold:Int, lowerThreshold:Int, upperMin:Int, lowerMin:Int){
         chart.delegate = self
         
+        chart.backgroundColor = UIColor.blackColor()
+        chart.gridBackgroundColor = UIColor.blackColor()
+        
         chart.clearDescriptionText()
         
         chart.setTouch()
@@ -348,12 +360,12 @@ class ViewController: UIViewController, ChartViewDelegate {
         chart.leftAxis.axisMinValue = Double(lowerMin)
         chart.leftAxis.axisMaxValue = Double(upperMin)
         
-        let ll1 = ChartLimitLine(limit: Double(upperThreshold), label: "Upper Limit (\(upperThreshold)F)")
+        let ll1 = ChartLimitLine(limit: Double(upperThreshold), label: "Upper Limit (\(upperThreshold)°F)")
         ll1.lineWidth = 4.0
         ll1.lineDashLengths = [5.0, 5.0]
         ll1.labelPosition = .RightTop
         
-        let ll2 = ChartLimitLine(limit: Double(lowerThreshold), label: "Lower Limit (\(lowerThreshold)F)")
+        let ll2 = ChartLimitLine(limit: Double(lowerThreshold), label: "Lower Limit (\(lowerThreshold)°F)")
         ll2.lineWidth = 4.0
         ll2.lineDashLengths = [5.0, 5.0]
         ll2.labelPosition = .RightBottom

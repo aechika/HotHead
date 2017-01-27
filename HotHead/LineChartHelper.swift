@@ -30,16 +30,19 @@ extension LineChartView {
         leftAxis.maxWidth = 35 //fix the value range width so the multiple graphs don't var in x position to the right of the values
         leftAxis.startAtZeroEnabled = false
         leftAxis.gridLineDashLengths = [5.0, 5.0]
-        leftAxis.drawGridLinesEnabled = false
+        leftAxis.drawGridLinesEnabled = true
         leftAxis.valueFormatter = NSNumberFormatter()
+        leftAxis.labelTextColor = UIColor.whiteColor()
         leftAxis.valueFormatter?.numberStyle = .DecimalStyle //default to a single digit after number, chart seems to automatically determine if it's needed or not
         
         //        leftAxis.spaceTop = 0.2 //provide a little extra space on top and bottom so points don't hug the borders
         //        leftAxis.spaceBottom = 0.2
         
         let xAxis:ChartXAxis = self.xAxis
-        xAxis.drawGridLinesEnabled = false
+        xAxis.gridLineDashLengths = [5.0, 5.0]
+        xAxis.drawGridLinesEnabled = true
         xAxis.drawLabelsEnabled = false
+        xAxis.labelTextColor = UIColor.whiteColor()
         
         self.rightAxis.enabled = false
         
@@ -55,9 +58,10 @@ extension LineChartView {
         self.marker = nil
     }
     
-    func setLegend(){
+    func setLegend() {
         //no need for chart legend right now
         self.legend.form = ChartLegend.Form.Line
+        self.legend.textColor = UIColor.whiteColor()
         self.legend.enabled = true
     }
     
@@ -114,7 +118,7 @@ extension LineChartView {
         set.highlightLineWidth = 0.5 //hide the highlight line
         set.setColor(lineColor)
         set.setCircleColor(circleColor)
-        set.lineWidth = 1.0
+        set.lineWidth = 3.0
         set.circleRadius = 4.5
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false

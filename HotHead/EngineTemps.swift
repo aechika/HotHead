@@ -27,6 +27,10 @@ class EngineTemps: Mappable {
     
     var timestamp:Int = 0
     
+    init() {
+        
+    }
+    
     init (jsonData:[String: AnyObject]?) {
         
         Mapper<EngineTemps>().map(jsonData, toObject: self)

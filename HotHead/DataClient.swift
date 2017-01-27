@@ -29,7 +29,7 @@ class DataClient {
     
     func requestEngineTemps(callback: ((data:EngineTemps?, error: NSError?) -> Void)) {
         
-        manager.request(Method.GET, baseUrl, parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
+        manager.request(Method.GET, url, parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
             .validate() //throws error if we receive response codes outside of 200-299
             .responseString { response -> Void in
                 

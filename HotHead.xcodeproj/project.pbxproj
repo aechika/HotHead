@@ -16,6 +16,7 @@
 		983893DA1E3AA530007C61A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983893D81E3AA530007C61A6 /* LaunchScreen.storyboard */; };
 		983893E51E3AA530007C61A6 /* HotHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983893E41E3AA530007C61A6 /* HotHeadTests.swift */; };
 		983893F01E3AA530007C61A6 /* HotHeadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983893EF1E3AA530007C61A6 /* HotHeadUITests.swift */; };
+		987D1F531E3BCF8A005B1564 /* beep-01a.wav in Resources */ = {isa = PBXBuildFile; fileRef = 987D1F521E3BCF8A005B1564 /* beep-01a.wav */; };
 		989BB3F21E3ABBE300EE7201 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989BB3F11E3ABBE300EE7201 /* Constants.swift */; };
 		98F746881E3AC6C700DEC20E /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F746871E3AC6C700DEC20E /* StringHelper.swift */; };
 		98F7468A1E3AC98E00DEC20E /* DataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F746891E3AC98E00DEC20E /* DataClient.swift */; };
@@ -56,6 +57,7 @@
 		983893EB1E3AA530007C61A6 /* HotHeadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HotHeadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		983893EF1E3AA530007C61A6 /* HotHeadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotHeadUITests.swift; sourceTree = "<group>"; };
 		983893F11E3AA530007C61A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		987D1F521E3BCF8A005B1564 /* beep-01a.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "beep-01a.wav"; path = "../../../../Downloads/beep-01a.wav"; sourceTree = "<group>"; };
 		989BB3F11E3ABBE300EE7201 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		98F746871E3AC6C700DEC20E /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		98F746891E3AC98E00DEC20E /* DataClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClient.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				983893D61E3AA530007C61A6 /* Assets.xcassets */,
 				983893D81E3AA530007C61A6 /* LaunchScreen.storyboard */,
 				983893DB1E3AA530007C61A6 /* Info.plist */,
+				987D1F521E3BCF8A005B1564 /* beep-01a.wav */,
 			);
 			path = HotHead;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				983893DA1E3AA530007C61A6 /* LaunchScreen.storyboard in Resources */,
 				983893D71E3AA530007C61A6 /* Assets.xcassets in Resources */,
 				983893D51E3AA530007C61A6 /* Main.storyboard in Resources */,
+				987D1F531E3BCF8A005B1564 /* beep-01a.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +529,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HotHead/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = KK.HotHead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -537,6 +542,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HotHead/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = KK.HotHead;
 				PRODUCT_NAME = "$(TARGET_NAME)";

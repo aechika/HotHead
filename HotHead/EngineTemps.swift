@@ -25,7 +25,7 @@ class EngineTemps: Mappable {
     var cht5:Int = 0
     var cht6:Int = 0
     
-    var timestamp:NSDate?
+    var timestamp:Int = 0
     
     init (jsonData:[String: AnyObject]?) {
         
@@ -52,12 +52,7 @@ class EngineTemps: Mappable {
         cht4    <-  map["CHT4"]
         cht5    <-  map["CHT5"]
         cht6    <-  map["CHT6"]
-        
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-//        if let dateString = map["TIMESTAMP"].currentValue as? String, let _date = dateFormatter.dateFromString(dateString) {
-//            timestamp = _date
-//        }
+        timestamp      <- map["TIMESTAMP"]
     }
     
     

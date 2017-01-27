@@ -8,4 +8,4 @@
 
 import Foundation
 
-let baseUrl = "http://10.32.56.142:5050"
+let UserDefaultKey_Base_Url = "base_url"

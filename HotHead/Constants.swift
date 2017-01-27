@@ -9,7 +9,6 @@
 import Foundation
 
 let UserDefaultKey_Base_Url = "base_url"
-let isMock = true
 
 
 let chtUpperThreshold:Int = 90

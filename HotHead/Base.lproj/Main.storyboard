@@ -31,8 +31,8 @@
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBk-N2-qhL">
-                                <rect key="frame" x="20" y="25" width="397" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBk-N2-qhL">
+                                <rect key="frame" x="20" y="25" width="411" height="30"/>
                                 <state key="normal" title="Set URL"/>
                                 <connections>
                                     <action selector="urlPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b2T-o8-kdy"/>

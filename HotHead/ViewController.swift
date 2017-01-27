@@ -64,7 +64,7 @@ class ViewController: UIViewController, ChartViewDelegate {
           
             btnUrl.setTitle(baseUrl, forState: UIControlState.Normal)
             
-            dataClient = DataClient(baseUrl: baseUrl, allowInvalidCert: true, isMock: isMock)
+            dataClient = DataClient(baseUrl: baseUrl, allowInvalidCert: true, isMock: (baseUrl == "mock"))
             
             //setup timer to run every 1 minute
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(requestUpdatedInfo), userInfo: nil, repeats: true)
@@ -324,6 +324,13 @@ class ViewController: UIViewController, ChartViewDelegate {
                 self.initializeView()
             }))
         
+        alert.addAction(UIAlertAction(title: "Mock", style: .Default, handler: { [weak alert] (action) -> Void in
+            _ = alert!.textFields![0] as UITextField
+            
+            defaults.setObject("mock", forKey: UserDefaultKey_Base_Url)
+            self.initializeView()
+            }))
+
         
         // 4. Present the alert.
         self.presentViewController(alert, animated: true, completion: nil)

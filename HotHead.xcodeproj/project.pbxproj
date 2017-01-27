@@ -144,6 +144,7 @@
 				983893D61E3AA530007C61A6 /* Assets.xcassets */,
 				983893D81E3AA530007C61A6 /* LaunchScreen.storyboard */,
 				983893DB1E3AA530007C61A6 /* Info.plist */,
+				989BB3F11E3ABBE300EE7201 /* Constants.swift */,
 				987D1F521E3BCF8A005B1564 /* beep-01a.wav */,
 			);
 			path = HotHead;
@@ -170,7 +171,6 @@
 		98F7468B1E3AD49900DEC20E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				989BB3F11E3ABBE300EE7201 /* Constants.swift */,
 				982FE7901E3AC22C00141EFD /* EngineTemps.swift */,
 			);
 			name = Models;

@@ -32,18 +32,6 @@ class ViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var vwAlertEGT5: UIView!
     @IBOutlet weak var vwAlertEGT6: UIView!
     
-    
-    var chtUpperThreshold:Int = 90
-    var chtLowerThreshold:Int = 40
-    var chtUpperMin:Int = 120
-    var chtLowerMin:Int = 20
-
-    var egtUpperThreshold:Int = 320
-    var egtLowerThreshold:Int = 100
-    var egtUpperMin:Int = 400
-    var egtLowerMin:Int = 50
-    
-    
     var dataClient:DataClient?
     var engineTemps:[EngineTemps?] = []
     let maxNumberOfPoints = 30
@@ -364,11 +352,13 @@ class ViewController: UIViewController, ChartViewDelegate {
         ll1.lineWidth = 4.0
         ll1.lineDashLengths = [5.0, 5.0]
         ll1.labelPosition = .RightTop
+        ll1.valueTextColor = NSUIColor.whiteColor()
         
         let ll2 = ChartLimitLine(limit: Double(lowerThreshold), label: "Lower Limit (\(lowerThreshold)°F)")
         ll2.lineWidth = 4.0
         ll2.lineDashLengths = [5.0, 5.0]
         ll2.labelPosition = .RightBottom
+        ll2.valueTextColor = NSUIColor.whiteColor()
         
         let leftAxis = chart.leftAxis
         leftAxis.removeAllLimitLines()

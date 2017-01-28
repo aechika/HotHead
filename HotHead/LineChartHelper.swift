@@ -28,7 +28,6 @@ extension LineChartView {
         let leftAxis:ChartYAxis = self.leftAxis
         leftAxis.minWidth = 35 //fix the value range width so the multiple graphs don't var in x position to the right of the values
         leftAxis.maxWidth = 35 //fix the value range width so the multiple graphs don't var in x position to the right of the values
-        leftAxis.startAtZeroEnabled = false
         leftAxis.gridLineDashLengths = [5.0, 5.0]
         leftAxis.drawGridLinesEnabled = true
         leftAxis.valueFormatter = NSNumberFormatter()
@@ -52,9 +51,6 @@ extension LineChartView {
     }
     
     func setMarker(){
-        let marker = ChartSelectionMarker(color: UIColor.blackColor())
-        marker.minimumSize = CGSizeMake(14.0, 7.0)
-        self.marker = marker
         self.marker = nil
     }
     

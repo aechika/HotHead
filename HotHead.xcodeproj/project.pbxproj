@@ -21,7 +21,6 @@
 		98F746881E3AC6C700DEC20E /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F746871E3AC6C700DEC20E /* StringHelper.swift */; };
 		98F7468A1E3AC98E00DEC20E /* DataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F746891E3AC98E00DEC20E /* DataClient.swift */; };
 		98F746921E3ADD3400DEC20E /* LineChartHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F746911E3ADD3400DEC20E /* LineChartHelper.swift */; };
-		98F746941E3AE01400DEC20E /* ChartSelectionMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F746931E3AE01400DEC20E /* ChartSelectionMarker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +61,6 @@
 		98F746871E3AC6C700DEC20E /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		98F746891E3AC98E00DEC20E /* DataClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClient.swift; sourceTree = "<group>"; };
 		98F746911E3ADD3400DEC20E /* LineChartHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartHelper.swift; sourceTree = "<group>"; };
-		98F746931E3AE01400DEC20E /* ChartSelectionMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSelectionMarker.swift; sourceTree = "<group>"; };
 		A87E9C7029E411CE81A93469 /* Pods-HotHead.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotHead.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HotHead/Pods-HotHead.debug.xcconfig"; sourceTree = "<group>"; };
 		F234D2107B8713209662B6D8 /* Pods-HotHead.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotHead.release.xcconfig"; path = "Pods/Target Support Files/Pods-HotHead/Pods-HotHead.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -189,7 +187,6 @@
 			children = (
 				98F746871E3AC6C700DEC20E /* StringHelper.swift */,
 				98F746911E3ADD3400DEC20E /* LineChartHelper.swift */,
-				98F746931E3AE01400DEC20E /* ChartSelectionMarker.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -383,7 +380,6 @@
 				989BB3F21E3ABBE300EE7201 /* Constants.swift in Sources */,
 				98F746881E3AC6C700DEC20E /* StringHelper.swift in Sources */,
 				982FE7911E3AC22C00141EFD /* EngineTemps.swift in Sources */,
-				98F746941E3AE01400DEC20E /* ChartSelectionMarker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
